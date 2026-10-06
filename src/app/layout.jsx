@@ -52,9 +52,9 @@ export const metadata = {
     images: ["/opengraph-image"],
   },
   icons: { icon: "/assets/logo.png", apple: "/assets/logo.png" },
-  verification: process.env.GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
-    : undefined,
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || "SbQPnZNy5dX3k-eJqduav1OC3Jmn_rBdgIKgKjOd8SY",
+  },
 };
 export const viewport = { themeColor: "#122c4a" };
 export default function RootLayout({ children }) {
