@@ -266,8 +266,9 @@ export default function Home() {
             </div>
             <EquipmentCatalog />
             <p className="catalog-note">
-              Imagens de referência. Modelos, especificações e disponibilidade
-              são confirmados no atendimento.
+              Imagens ilustrativas, incluindo representações geradas a partir das
+              referências. Modelos, especificações e disponibilidade são
+              confirmados no atendimento.
             </p>
           </div>
         </section>

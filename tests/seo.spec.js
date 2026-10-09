@@ -16,7 +16,7 @@ test("HTML inicial entrega serviços, catálogo, região e metadados sem JavaScr
   await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.locator(".service-card")).toHaveCount(4);
-  await expect(page.locator(".equipment-card")).toHaveCount(5);
+  await expect(page.locator(".equipment-card")).toHaveCount(40);
   await expect(page.locator(".hero-description")).toContainText("Lagarto");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",

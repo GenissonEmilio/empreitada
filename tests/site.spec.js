@@ -4,9 +4,9 @@ test("catálogo filtra, busca sem acentos e mostra estado vazio", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".equipment-card")).toHaveCount(5);
-  await page.getByRole("button", { name: "Ferramentas", exact: true }).click();
-  await expect(page.locator(".equipment-card")).toHaveCount(3);
+  await expect(page.locator(".equipment-card")).toHaveCount(40);
+  await page.getByRole("button", { name: "Elétricas", exact: true }).click();
+  await expect(page.locator(".equipment-card")).toHaveCount(16);
   await page.getByRole("searchbox").fill("marmore");
   await expect(page.locator(".equipment-card")).toHaveCount(1);
   await expect(page.locator(".equipment-card h3")).toHaveText("Serra mármore");

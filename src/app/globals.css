@@ -1310,3 +1310,219 @@ footer {
 .noscript-note a {
   text-decoration: underline;
 }
+
+/* Individual equipment cards and accessible autoplay controls. */
+.equipment-carousel {
+  min-width: 0;
+}
+.carousel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 0 0 20px;
+}
+.carousel-heading p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+.carousel-heading strong {
+  color: var(--navy);
+}
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-right: 4px;
+}
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.carousel-controls button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #d8dcd9;
+  background: #fff;
+  color: var(--navy);
+  border-radius: 50%;
+  font-size: 19px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.carousel-controls button:hover {
+  border-color: var(--orange);
+  background: #fff3e9;
+}
+.carousel-controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.carousel-controls .carousel-play {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 10px;
+  padding: 0 12px;
+}
+.carousel-play span {
+  font-size: 17px;
+}
+.equipment-grid.equipment-track {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding: 8px 3px 20px;
+  margin: -8px -3px -20px;
+  position: relative;
+}
+.equipment-track::-webkit-scrollbar {
+  display: none;
+}
+.equipment-track .equipment-card {
+  flex: 0 0 calc((100% - 54px) / 4);
+  min-width: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.equipment-track .equipment-image {
+  height: 220px;
+  padding: 25px;
+  border-bottom: 1px solid #f1f2ed;
+}
+.equipment-track .equipment-info {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.equipment-track .equipment-info h3 {
+  font-size: 17px;
+  margin-top: 10px;
+}
+.equipment-track .equipment-info p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 3px 0 16px;
+  min-height: 65px;
+}
+.equipment-use {
+  color: #667682;
+  font-size: 10px;
+  padding: 10px 12px;
+  background: #f7f8f5;
+  border-radius: 4px;
+  margin: auto 0 0;
+  line-height: 1.6;
+}
+.equipment-use span {
+  color: var(--orange);
+  margin-right: 4px;
+}
+.equipment-track .equipment-consult {
+  margin-top: 18px;
+  font-size: 11px;
+}
+.carousel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-top: 24px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.carousel-footer > span span {
+  margin-left: 10px;
+  color: var(--orange);
+}
+.carousel-progress {
+  width: 160px;
+  height: 2px;
+  background: #dedfda;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.carousel-progress span {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  transition: width 0.4s;
+}
+.catalog-toolbar .filters {
+  flex-wrap: wrap;
+}
+@media (max-width: 1100px) {
+  .equipment-track .equipment-card {
+    flex-basis: calc((100% - 36px) / 3);
+  }
+}
+@media (max-width: 760px) {
+  .equipment-track .equipment-card {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+  .equipment-track .equipment-info {
+    padding: 18px;
+  }
+  .equipment-track .equipment-image {
+    height: 190px;
+  }
+  .carousel-heading {
+    gap: 12px;
+  }
+  .carousel-controls {
+    gap: 5px;
+  }
+  .carousel-controls .carousel-play {
+    padding: 0 4px;
+  }
+  .carousel-heading p {
+    font-size: 10px;
+  }
+}
+@media (max-width: 520px) {
+  .equipment-track .equipment-card {
+    flex-basis: 82%;
+  }
+  .equipment-track .equipment-image {
+    height: 215px;
+  }
+  .equipment-track .equipment-info p {
+    min-height: 44px;
+  }
+  .carousel-heading {
+    align-items: flex-start;
+  }
+  .carousel-heading p {
+    max-width: 130px;
+    line-height: 1.5;
+    flex-wrap: wrap;
+  }
+  .carousel-controls button {
+    width: 34px;
+    height: 34px;
+  }
+  .carousel-progress {
+    width: 90px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .equipment-track {
+    scroll-behavior: auto;
+  }
+}
