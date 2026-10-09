@@ -7,7 +7,13 @@ test("carrossel avança sozinho e permite pausar sem reiniciar", async ({
   await page.locator(".equipment-carousel").scrollIntoViewIfNeeded();
   const scroll = () =>
     page.locator(".equipment-track").evaluate((element) => element.scrollLeft);
-  await expect.poll(scroll, { timeout: 7000 }).toBeGreaterThan(0);
+  await page.locator(".equipment-track").hover();
+  await page
+    .locator(".equipment-track")
+    .dispatchEvent("wheel", { deltaY: 100 });
+  await expect.poll(scroll, { timeout: 2000 }).toBeGreaterThan(10);
+  const initial = await scroll();
+  await expect.poll(scroll, { timeout: 2000 }).toBeGreaterThan(initial + 20);
   await page
     .getByRole("button", { name: "Pausar carrossel", exact: true })
     .click();
@@ -20,6 +26,25 @@ test("carrossel avança sozinho e permite pausar sem reiniciar", async ({
   expect(await scroll()).toBeCloseTo(paused, 0);
   await page.getByRole("button", { name: "Próximos equipamentos" }).click();
   await expect.poll(scroll).toBeGreaterThan(paused);
+});
+
+test("carrossel retoma após setas e mantém reprodução ao filtrar", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Manuais", exact: true }).click();
+  await page.locator(".equipment-carousel").scrollIntoViewIfNeeded();
+  const track = page.locator(".equipment-track");
+  const scroll = () => track.evaluate((element) => element.scrollLeft);
+  await expect.poll(scroll, { timeout: 2000 }).toBeGreaterThan(10);
+  await page.getByRole("button", { name: "Próximos equipamentos" }).click();
+  await expect(track).toHaveAttribute("data-autoplay", "false");
+  await page.waitForTimeout(800);
+  const manual = await scroll();
+  await expect(track).toHaveAttribute("data-autoplay", "true", {
+    timeout: 6000,
+  });
+  await expect.poll(scroll, { timeout: 2000 }).toBeGreaterThan(manual + 20);
 });
 
 test("movimento reduzido, filtros manuais e imagens individuais", async ({

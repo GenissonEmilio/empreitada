@@ -20,4 +20,4 @@ Subjects: rotary hammer drill; angle grinder; orbital finishing sander; jigsaw; 
 
 ## Comportamento do carrossel
 
-Avança um cartão a cada 4,2 segundos quando está visível. Pausa ao passar o mouse, focar um cartão, usar filtros/busca ou navegar manualmente. O botão Reproduzir permite retomá-lo. Respeita movimento reduzido e pausa quando a aba está oculta. Não duplica cartões nem links; todo o catálogo permanece no HTML inicial.
+Desliza continuamente a 32 px por segundo quando está visível e volta ao início ao alcançar o fim. Rolar a página, passar o mouse e trocar filtros não desligam a reprodução. Setas e gestos de navegação suspendem o movimento por 4,5 segundos, com retomada automática. Pausa enquanto um link de consulta recebe foco pelo teclado. O botão Pausar interrompe a reprodução até o usuário escolher Reproduzir. Respeita movimento reduzido e pausa quando a aba está oculta. Não duplica cartões nem links; todo o catálogo permanece no HTML inicial.

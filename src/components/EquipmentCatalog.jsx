@@ -20,12 +20,14 @@ export default function EquipmentCatalog() {
   const [filter, setFilter] = useState("todos");
   const [query, setQuery] = useState("");
   const [playing, setPlaying] = useState(true);
-  const [hovered, setHovered] = useState(false);
+  const [interacting, setInteracting] = useState(false);
+  const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [inView, setInView] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [position, setPosition] = useState(0);
   const track = useRef(null);
+  const interactionTimer = useRef(null);
   const items = equipment.filter(
     (item) =>
       (filter === "todos" || item.category === filter) &&
@@ -66,7 +68,16 @@ export default function EquipmentCatalog() {
     setPosition(0);
     track.current?.scrollTo({ left: 0, behavior: "instant" });
   }, [filter, query]);
-  function move(direction, automatic = false) {
+  function pauseInteraction() {
+    setInteracting(true);
+    window.clearTimeout(interactionTimer.current);
+    interactionTimer.current = window.setTimeout(
+      () => setInteracting(false),
+      4500,
+    );
+  }
+  useEffect(() => () => window.clearTimeout(interactionTimer.current), []);
+  function move(direction) {
     const element = track.current;
     if (!element || !element.children.length) return;
     const first = element.children[0];
@@ -89,15 +100,44 @@ export default function EquipmentCatalog() {
           ? "instant"
           : "smooth",
     });
-    if (!automatic) setPlaying(false);
+    pauseInteraction();
   }
   useEffect(() => {
-    if (!playing || hovered || hidden || !inView || items.length < 2) return;
-    const timer = window.setInterval(() => move(1, true), 4200);
-    return () => window.clearInterval(timer);
+    if (
+      !playing ||
+      interacting ||
+      focused ||
+      hidden ||
+      !inView ||
+      items.length < 2
+    )
+      return;
+    let frame;
+    let previous;
+    let remainder = 0;
+    function animate(now) {
+      const element = track.current;
+      if (element && previous !== undefined) {
+        remainder += (Math.min(now - previous, 50) * 32) / 1000;
+        const pixels = Math.floor(remainder);
+        remainder -= pixels;
+        const max = element.scrollWidth - element.clientWidth;
+        if (pixels && max > 0) {
+          element.scrollLeft =
+            element.scrollLeft >= max - 1
+              ? 0
+              : Math.min(max, element.scrollLeft + pixels);
+        }
+      }
+      previous = now;
+      frame = window.requestAnimationFrame(animate);
+    }
+    frame = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frame);
   }, [
     playing,
-    hovered,
+    interacting,
+    focused,
     hidden,
     inView,
     reducedMotion,
@@ -114,7 +154,6 @@ export default function EquipmentCatalog() {
   }
   function selectFilter(value) {
     setFilter(value);
-    setPlaying(false);
   }
 
   return (
@@ -143,7 +182,6 @@ export default function EquipmentCatalog() {
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
-              setPlaying(false);
             }}
           />
         </label>
@@ -153,10 +191,13 @@ export default function EquipmentCatalog() {
         role="region"
         aria-roledescription="carrossel"
         aria-label="Ferramentas e equipamentos"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         onFocusCapture={(event) => {
-          if (!event.target.closest(".carousel-play")) setPlaying(false);
+          setFocused(Boolean(event.target.closest(".equipment-consult")));
+        }}
+        onBlurCapture={(event) => {
+          setFocused(
+            Boolean(event.relatedTarget?.closest?.(".equipment-consult")),
+          );
         }}
       >
         <div className="carousel-heading">
@@ -202,9 +243,16 @@ export default function EquipmentCatalog() {
           id="equipment-grid"
           role="list"
           ref={track}
+          data-autoplay={
+            playing && !interacting && !focused && !hidden && inView
+          }
           onScroll={updatePosition}
-          onPointerDown={() => setPlaying(false)}
-          onWheel={() => setPlaying(false)}
+          onPointerDown={pauseInteraction}
+          onPointerUp={pauseInteraction}
+          onPointerCancel={pauseInteraction}
+          onWheel={(event) => {
+            if (event.deltaX || event.shiftKey) pauseInteraction();
+          }}
         >
           {items.map((item) => (
             <article key={item.name} className="equipment-card" role="listitem">

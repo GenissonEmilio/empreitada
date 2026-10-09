@@ -1393,6 +1393,10 @@ footer {
 .equipment-track::-webkit-scrollbar {
   display: none;
 }
+.equipment-grid.equipment-track[data-autoplay="true"] {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
 .equipment-track .equipment-card {
   flex: 0 0 calc((100% - 54px) / 4);
   min-width: 0;
