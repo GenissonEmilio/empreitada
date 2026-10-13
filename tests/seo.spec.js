@@ -20,7 +20,7 @@ test("HTML inicial entrega serviços, catálogo, região e metadados sem JavaScr
   await expect(page.locator(".hero-description")).toContainText("Lagarto");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    /^https:\/\/empreitada\.vercel\.app\/?$/,
+    /^https:\/\/empreitada\.net\.br\/?$/,
   );
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
@@ -32,7 +32,7 @@ test("HTML inicial entrega serviços, catálogo, região e metadados sem JavaScr
   );
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
     "content",
-    /^https:\/\/empreitada\.vercel\.app\/?$/,
+    /^https:\/\/empreitada\.net\.br\/?$/,
   );
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
     "content",
@@ -56,11 +56,11 @@ test("robots e sitemap usam a URL pública e imagem social existe", async ({
   expect(robots.ok()).toBe(true);
   const text = await robots.text();
   expect(text).toContain("Allow: /");
-  expect(text).toContain("Sitemap: https://empreitada.vercel.app/sitemap.xml");
+  expect(text).toContain("Sitemap: https://empreitada.net.br/sitemap.xml");
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBe(true);
   const xml = await sitemap.text();
-  expect(xml).toContain("<loc>https://empreitada.vercel.app/</loc>");
+  expect(xml).toContain("<loc>https://empreitada.net.br/</loc>");
   expect(xml).not.toMatch(/localhost|127\.0\.0\.1|#[a-z]/);
   const image = await request.get("/opengraph-image");
   expect(image.ok()).toBe(true);

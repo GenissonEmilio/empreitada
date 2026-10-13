@@ -1,4 +1,4 @@
-const configuredUrl = process.env.SITE_URL || "https://empreitada.vercel.app";
+const configuredUrl = process.env.SITE_URL || "https://empreitada.net.br";
 const parsedUrl = new URL(configuredUrl);
 if (
   !["http:", "https:"].includes(parsedUrl.protocol) ||

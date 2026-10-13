@@ -2,6 +2,16 @@
 const nextConfig = {
   poweredByHeader: false,
   images: { qualities: [75, 85] },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "empreitada.vercel.app" }],
+        destination: "https://empreitada.net.br/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

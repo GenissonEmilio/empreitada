@@ -13,13 +13,13 @@
 ## Configuração na Vercel
 
 1. Use o preset **Next.js**. Build: `npm run build`; instalação: `npm ci`; deixe o diretório de saída como padrão do framework (remova `dist`, se configurado antes).
-2. No ambiente Production, configure `SITE_URL=https://empreitada.vercel.app` e `SITE_NOINDEX=false`. Este endereço já é o padrão do projeto.
+2. No ambiente Production, configure `SITE_URL=https://empreitada.net.br` e `SITE_NOINDEX=false`. Este endereço já é o padrão do projeto.
 3. Publique e confirme respostas HTTP 200 em `/`, `/robots.txt`, `/sitemap.xml` e `/opengraph-image`.
-4. Confira que o HTML contém canonical `https://empreitada.vercel.app/` e robots `index, follow`.
+4. Confira que o HTML contém canonical `https://empreitada.net.br/` e robots `index, follow`.
 
 ## Ações que exigem a conta do proprietário
 
-1. Abra [Google Search Console](https://search.google.com/search-console) e adicione uma propriedade de **prefixo de URL**: `https://empreitada.vercel.app/`.
+1. Abra [Google Search Console](https://search.google.com/search-console) e adicione uma propriedade de **prefixo de URL**: `https://empreitada.net.br/`.
 2. Escolha a verificação por **tag HTML**. Copie somente o token do atributo `content` para `GOOGLE_SITE_VERIFICATION` no ambiente Production da Vercel. Publique novamente e conclua a verificação. O código já cria a meta tag automaticamente.
 3. Envie `sitemap.xml` em Sitemaps.
 4. Use Inspeção de URL na página inicial e solicite indexação. A solicitação e o sitemap não garantem inclusão ou prazo de indexação.

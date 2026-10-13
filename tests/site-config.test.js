@@ -8,7 +8,7 @@ test("prévia não é indexável e validação evita canonical incorreto", async
     SITE_NOINDEX: process.env.SITE_NOINDEX,
   };
   try {
-    process.env.SITE_URL = "https://empreitada.vercel.app";
+    process.env.SITE_URL = "https://empreitada.net.br";
     process.env.VERCEL_ENV = "preview";
     process.env.SITE_NOINDEX = "false";
     assert.equal((await import("../src/lib/site.js?preview")).indexable, false);
@@ -22,7 +22,7 @@ test("prévia não é indexável e validação evita canonical incorreto", async
       (await import("../src/lib/site.js?disabled")).indexable,
       false,
     );
-    process.env.SITE_URL = "https://empreitada.vercel.app/errado";
+    process.env.SITE_URL = "https://empreitada.net.br/errado";
     await assert.rejects(import("../src/lib/site.js?invalid"), /SITE_URL/);
   } finally {
     for (const [key, value] of Object.entries(original)) {
