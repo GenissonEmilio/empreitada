@@ -17,11 +17,11 @@
 3. Publique e confirme respostas HTTP 200 em `/`, `/robots.txt`, `/sitemap.xml` e `/opengraph-image`.
 4. Confira que o HTML contém canonical `https://empreitada.net.br/` e robots `index, follow`.
 
-## Ações que exigem a conta do proprietário
+## Search Console
 
-1. Abra [Google Search Console](https://search.google.com/search-console) e adicione uma propriedade de **prefixo de URL**: `https://empreitada.net.br/`.
-2. Escolha a verificação por **tag HTML**. Copie somente o token do atributo `content` para `GOOGLE_SITE_VERIFICATION` no ambiente Production da Vercel. Publique novamente e conclua a verificação. O código já cria a meta tag automaticamente.
-3. Envie `sitemap.xml` em Sitemaps.
+1. A propriedade de **domínio** `empreitada.net.br` foi verificada por TXT DNS na conta `officegenisson@gmail.com` em 13/10/2026. Preserve esse TXT no Registro.br.
+2. O site anterior também possui verificação por tag HTML. O código mantém suporte a `GOOGLE_SITE_VERIFICATION`.
+3. `https://empreitada.net.br/sitemap.xml` foi enviado ao Google. O estado inicial informa dificuldade de busca, embora o arquivo responda HTTP 200 com XML válido; aguarde o processamento e investigue se o erro persistir.
 4. Use Inspeção de URL na página inicial e solicite indexação. A solicitação e o sitemap não garantem inclusão ou prazo de indexação.
 5. Acompanhe relatórios de indexação, consultas, cliques e Core Web Vitals; investigue erros reais em vez de repetir solicitações.
 6. Crie ou atualize o [Perfil da Empresa no Google](https://www.google.com/business/), se a empresa for elegível. Use ESM Empreiteira, o mesmo telefone, o site e as regiões atendidas. Empresas que atendem no local do cliente devem seguir as orientações de área de cobertura; não publique um endereço que não recebe clientes.
@@ -32,7 +32,7 @@
 - Informações confirmadas de endereço e horários, se aplicáveis; só então ampliar os dados estruturados.
 - Avaliações autênticas no Perfil da Empresa.
 - Páginas específicas de serviços apenas quando houver conteúdo útil próprio, evitando páginas repetidas por cidade ou palavras-chave em excesso.
-- Ao adotar domínio próprio, atualizar `SITE_URL`, redirecionar permanentemente o endereço antigo para o novo e atualizar Search Console e Perfil da Empresa.
+- O domínio próprio já é o canonical, e o endereço antigo redireciona permanentemente preservando caminhos e parâmetros. Atualize também o Perfil da Empresa quando ele existir.
 
 ## Referências
 
